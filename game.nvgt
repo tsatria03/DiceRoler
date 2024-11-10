@@ -1,0 +1,538 @@
+#include"bgt_compat.nvgt"
+#include"form.nvgt"
+#include"speech.nvgt"
+#include"sound_pool.nvgt"
+int modifier=1, dice1, dice2, dice3, dice4, dice5, dice6, diceset=1;
+string dicestatus, dicecounter;
+audio_form form;
+sound_pool pool;
+void main()
+{
+show_game_window("dice roler");
+dicegame();
+}
+void dicegame()
+{
+form.create_window("Dice roler", false);
+int roll=form.create_button("roll dice");
+int switchmod=form.create_button("change dice modifier");
+int switchset=form.create_button("change dice set");
+while(true)
+{
+form.monitor();
+wait(5);
+if(form.is_pressed(roll))
+{
+if(diceset==1 and modifier==1)
+{
+dice1=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==1 and modifier==2)
+{
+dice1=random(1,4);
+dice2=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==1 and modifier==3)
+{
+dice1=random(1,4);
+dice2=random(1,4);
+dice3=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==1 and modifier==4)
+{
+dice1=random(1,4);
+dice2=random(1,4);
+dice3=random(1,4);
+dice4=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==1 and modifier==5)
+{
+dice1=random(1,4);
+dice2=random(1,4);
+dice3=random(1,4);
+dice4=random(1,4);
+dice5=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==1 and modifier==6)
+{
+dice1=random(1,4);
+dice2=random(1,4);
+dice3=random(1,4);
+dice4=random(1,4);
+dice5=random(1,4);
+dice6=random(1,4);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+if(diceset==2 and modifier==1)
+{
+dice1=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==2 and modifier==2)
+{
+dice1=random(1,6);
+dice2=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==2 and modifier==3)
+{
+dice1=random(1,6);
+dice2=random(1,6);
+dice3=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==2 and modifier==4)
+{
+dice1=random(1,6);
+dice2=random(1,6);
+dice3=random(1,6);
+dice4=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==2 and modifier==5)
+{
+dice1=random(1,6);
+dice2=random(1,6);
+dice3=random(1,6);
+dice4=random(1,6);
+dice5=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==2 and modifier==6)
+{
+dice1=random(1,6);
+dice2=random(1,6);
+dice3=random(1,6);
+dice4=random(1,6);
+dice5=random(1,6);
+dice6=random(1,6);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+if(diceset==3 and modifier==1)
+{
+dice1=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==3 and modifier==2)
+{
+dice1=random(1,8);
+dice2=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==3 and modifier==3)
+{
+dice1=random(1,8);
+dice2=random(1,8);
+dice3=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==3 and modifier==4)
+{
+dice1=random(1,8);
+dice2=random(1,8);
+dice3=random(1,8);
+dice4=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==3 and modifier==5)
+{
+dice1=random(1,8);
+dice2=random(1,8);
+dice3=random(1,8);
+dice4=random(1,8);
+dice5=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==3 and modifier==6)
+{
+dice1=random(1,8);
+dice2=random(1,8);
+dice3=random(1,8);
+dice4=random(1,8);
+dice5=random(1,8);
+dice6=random(1,8);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+if(diceset==4 and modifier==1)
+{
+dice1=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==4 and modifier==2)
+{
+dice1=random(1,12);
+dice2=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==4 and modifier==3)
+{
+dice1=random(1,12);
+dice2=random(1,12);
+dice3=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==4 and modifier==4)
+{
+dice1=random(1,12);
+dice2=random(1,12);
+dice3=random(1,12);
+dice4=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==4 and modifier==5)
+{
+dice1=random(1,12);
+dice2=random(1,12);
+dice3=random(1,12);
+dice4=random(1,12);
+dice5=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==4 and modifier==6)
+{
+dice1=random(1,12);
+dice2=random(1,12);
+dice3=random(1,12);
+dice4=random(1,12);
+dice5=random(1,12);
+dice6=random(1,12);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+if(diceset==5 and modifier==1)
+{
+dice1=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==5 and modifier==2)
+{
+dice1=random(1,20);
+dice2=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==5 and modifier==3)
+{
+dice1=random(1,20);
+dice2=random(1,20);
+dice3=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==5 and modifier==4)
+{
+dice1=random(1,20);
+dice2=random(1,20);
+dice3=random(1,20);
+dice4=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==5 and modifier==5)
+{
+dice1=random(1,20);
+dice2=random(1,20);
+dice3=random(1,20);
+dice4=random(1,20);
+dice5=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==5 and modifier==6)
+{
+dice1=random(1,20);
+dice2=random(1,20);
+dice3=random(1,20);
+dice4=random(1,20);
+dice5=random(1,20);
+dice6=random(1,20);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+if(diceset==6 and modifier==1)
+{
+dice1=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("you rold a;"+dice1);
+}
+if(diceset==6 and modifier==2)
+{
+dice1=random(1,100);
+dice2=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+",for a total score of"+(dice1+dice2));
+}
+if(diceset==6 and modifier==3)
+{
+dice1=random(1,100);
+dice2=random(1,100);
+dice3=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+",for a total score of"+(dice1+dice2+dice3));
+}
+if(diceset==6 and modifier==4)
+{
+dice1=random(1,100);
+dice2=random(1,100);
+dice3=random(1,100);
+dice4=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+",for a total score of"+(dice1+dice2+dice3+dice4));
+}
+if(diceset==6 and modifier==5)
+{
+dice1=random(1,100);
+dice2=random(1,100);
+dice3=random(1,100);
+dice4=random(1,100);
+dice5=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+",for a total score of"+(dice1+dice2+dice3+dice4+dice5));
+}
+if(diceset==6 and modifier==6)
+{
+dice1=random(1,100);
+dice2=random(1,100);
+dice3=random(1,100);
+dice4=random(1,100);
+dice5=random(1,100);
+dice6=random(1,100);
+pool.play_stationary("sounds/diceroll.ogg",false);
+wait(500);
+pool.play_stationary("sounds/dicebeep"+random(1,2)+".ogg",false);
+speak("the dice shows;"+dice1+","+dice2+","+dice3+","+dice4+","+dice5+","+dice6+",for a total score of"+(dice1+dice2+dice3+dice4+dice5+dice6));
+}
+}
+if(form.is_pressed(switchset))
+if (diceset==1)
+{
+diceset=2;
+speak("D6");
+}
+else if (diceset==2){
+diceset=3;
+speak("D8");
+}
+else if (diceset==3)
+{
+diceset=4;
+speak("D12");
+}
+else if (diceset==4)
+{
+diceset=5;
+speak("D20");
+}
+else if (diceset==5)
+{
+diceset=6;
+speak("D100");
+}
+else
+{
+diceset=1;
+speak("D4");
+}
+if(form.is_pressed(switchmod))
+if (modifier==1)
+{
+modifier=2;
+speak("2 dice");
+}
+else if (modifier==2){
+modifier=3;
+speak("3 dice");
+}
+else if (modifier==3)
+{
+modifier=4;
+speak("4 dice");
+}
+else if (modifier==4)
+{
+modifier=5;
+speak("5 dice");
+}
+else if (modifier==5)
+{
+modifier=6;
+speak("6 dice");
+}
+else
+{
+modifier=1;
+speak("1 die");
+}
+if(key_pressed(KEY_F))
+{
+speak("You're currently using"+dicestatus);
+}
+if(key_pressed(KEY_J))
+{
+speak("You're currently holding"+dicecounter);
+}
+if(key_pressed(KEY_R))
+{
+form.focus(roll);
+}
+if(key_pressed(KEY_M))
+{
+form.focus(switchmod);
+}
+if(key_pressed(KEY_S))
+{
+form.focus(switchset);
+}
+if (diceset==1)
+{
+dicestatus="4 sided dice";
+}
+if (diceset==2)
+{
+dicestatus="6 sided dice";
+}
+if (diceset==3)
+{
+dicestatus="8 sided dice";
+}
+if (diceset==4)
+{
+dicestatus="12 sided dice";
+}
+if (diceset==5)
+{
+dicestatus="20 sided dice";
+}
+if (diceset==6)
+{
+dicestatus="100 sided dice";
+}
+if (modifier==1)
+{
+dicecounter="1 die";
+}
+if (modifier==2)
+{
+dicecounter="2 dice";
+}
+if (modifier==3)
+{
+dicecounter="3 dice";
+}
+if (modifier==4)
+{
+dicecounter="4 dice";
+}
+if (modifier==5)
+{
+dicecounter="5 dice";
+}
+if (modifier==6)
+{
+dicecounter="6 dice";
+}
+if(key_pressed(KEY_ESCAPE))
+{
+exit();
+}
+}
+}
