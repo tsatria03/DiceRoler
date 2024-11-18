@@ -1,0 +1,4 @@
+new in 1.0
+Added a custom modifier list to the game that allows you to define an extra modifier to the dice that you've just rolled.
+Converted the dice modifiers and dice set buttons into lists that you can choose from. This helps you pick out the dice you want to roll.
+Made various code optimizations.
