@@ -2,23 +2,19 @@
 #include "form.nvgt"
 #include "speech.nvgt"
 #include "sound_pool.nvgt"
-
 bool rolling = false;
 audio_form form;
 sound_pool pool;
 timer Rolltimer;
-
 string to_string(int value)
 {
     return "" + value;
 }
-
 void main()
 {
     show_game_window("Custom Dice Roller");
     dicegame();
 }
-
 void dicegame()
 {
     form.create_window("Dice Roller", false);
@@ -26,60 +22,57 @@ void dicegame()
     int dice_set_list = form.create_list("Dice Type");
     int dice_mod_list = form.create_list("Number of Dice");
     int custom_mod_list = form.create_list("Custom Modifier");
-
-    string[] dice_values = {"100-sided (D100)", "20-sided (D20)", "12-sided (D12)", "8-sided (D8)", "6-sided (D6)", "4-sided (D4)"};
+    string[] dice_values = {"100-sided (D100)", "30-sided (D30)", "20-sided (D20)", "16-sided (D16)", "12-sided (D12)", "8-sided (D8)", "6-sided (D6)", "4-sided (D4)", "3-sided (D3)", "2-sided (D2)"};
     for (uint i = 0; i < dice_values.length(); i++)
     {
         form.add_list_item(dice_set_list, dice_values[i]);
     }
-    form.set_list_position(dice_set_list, 5);
-
-    string[] dice_sets = {"6 dice", "5 dice", "4 dice", "3 dice", "2 dice", "1 die"};
+    form.set_list_position(dice_set_list, 6);
+    string[] dice_sets;
+    for (uint i = 20; i >= 1; i--)
+    {
+        dice_sets.insert_last(to_string(i) + (i == 1 ? " die" : " dice"));
+    }
     for (uint i = 0; i < dice_sets.length(); i++)
     {
         form.add_list_item(dice_mod_list, dice_sets[i]);
     }
-    form.set_list_position(dice_mod_list, 5);
-
+    form.set_list_position(dice_mod_list, 19); // Default to 1 die
     string[] custom_modifiers = {"+10", "+5", "+3", "+1", "0", "-1", "-3", "-5", "-10"};
     for (uint i = 0; i < custom_modifiers.length(); i++)
     {
         form.add_list_item(custom_mod_list, custom_modifiers[i]);
     }
     form.set_list_position(custom_mod_list, 4);
-
-
     while (true)
     {
         form.monitor();
         wait(5);
-
         if (form.is_pressed(roll) && !rolling)
         {
             rolling = true;
             Rolltimer.restart();
-speak("rolling dice");
             pool.play_stationary("sounds/diceroll.ogg", false);
         }
-
         if (rolling && Rolltimer.elapsed >= 1000)
         {
             rolling = false;
             pool.play_stationary("sounds/dicebeep" + random(1, 2) + ".ogg", false);
-
-            int selected_dice_value = 4;
+            int selected_dice_value = 6;
             switch (form.get_list_position(dice_set_list))
             {
                 case 0: selected_dice_value = 100; break;
-                case 1: selected_dice_value = 20; break;
-                case 2: selected_dice_value = 12; break;
-                case 3: selected_dice_value = 8; break;
-                case 4: selected_dice_value = 6; break;
-                case 5: selected_dice_value = 4; break;
+                case 1: selected_dice_value = 30; break;
+                case 2: selected_dice_value = 20; break;
+                case 3: selected_dice_value = 16; break;
+                case 4: selected_dice_value = 12; break;
+                case 5: selected_dice_value = 8; break;
+                case 6: selected_dice_value = 6; break;
+                case 7: selected_dice_value = 4; break;
+                case 8: selected_dice_value = 3; break;
+                case 9: selected_dice_value = 2; break;
             }
-
-            int selected_dice_count = 6 - form.get_list_position(dice_mod_list);
-
+            int selected_dice_count = 20 - form.get_list_position(dice_mod_list);
             int selected_custom_modifier = 0;
             switch (form.get_list_position(custom_mod_list))
             {
@@ -93,7 +86,6 @@ speak("rolling dice");
                 case 7: selected_custom_modifier = -5; break;
                 case 8: selected_custom_modifier = -10; break;
             }
-
             int total = 0;
             string results = "The dice show: ";
             for (int i = 0; i < selected_dice_count; i++)
@@ -102,7 +94,6 @@ speak("rolling dice");
                 total += roll;
                 results += to_string(roll) + (i < selected_dice_count - 1 ? ", " : "");
             }
-
             string modifier_text = "";
             if (selected_custom_modifier > 0)
             {
@@ -116,13 +107,11 @@ speak("rolling dice");
             {
                 modifier_text = "zero";
             }
-
             total += selected_custom_modifier;
             results += ", with a modifier of " + modifier_text;
             results += ", for a total score of " + to_string(total);
             speak(results);
         }
-
         if (key_pressed(KEY_ESCAPE))
         {
             exit();

@@ -1,4 +1,6 @@
 new in 1.0
+Increased the Number of Dice you can hold at once. The Number of Dice list now allows up to 20 dice, starting with 1 die.
+Expanded Dice Types. Added D2, D3, D16, and D30 to the list of possible dice you can roll.
 Added a custom modifier list to the game that allows you to define an extra modifier to the dice that you've just rolled.
 Converted the dice modifiers and dice set buttons into lists that you can choose from. This helps you pick out the dice you want to roll.
 Made various code optimizations.
