@@ -10,6 +10,53 @@ string to_string(int value)
 {
     return "" + value;
 }
+void dlg(string message, int timeout=-1)
+{
+timer timeouter;
+speak(message);
+while(true)
+{
+wait(5);
+if (timeout>-1 and timeouter.elapsed>=timeout)
+return;
+if (key_pressed(KEY_C))
+{
+speak("Copied");
+clipboard_copy_text(message);
+}
+if (key_pressed(KEY_LEFT) or key_pressed(KEY_RIGHT) or key_pressed(KEY_UP) or key_pressed(KEY_DOWN))
+{
+speak(message);
+}
+if(key_pressed(KEY_SPACE) or key_pressed(KEY_RETURN))
+{
+break;
+}
+}
+}
+void dlgplay(string dlgsound, bool skippable=true, bool fadeable=true, int fadetime=30)
+{
+sound dlgaudio;
+dlgaudio.load(dlgsound);
+dlgaudio.play();
+while(dlgaudio.playing)
+{
+wait(5);
+if(key_pressed(KEY_RETURN) and skippable==true or key_pressed(KEY_SPACE) and skippable==true)
+{
+if (fadeable==true)
+{
+while (dlgaudio.volume>=-40)
+{
+dlgaudio.volume=dlgaudio.volume-2;
+wait(fadetime);
+}
+}
+dlgaudio.stop();
+break;
+}
+}
+}
 void main()
 {
     show_game_window("Custom Dice Roller");
@@ -18,10 +65,10 @@ void main()
 void dicegame()
 {
     form.create_window("Dice Roller", false);
-    int roll = form.create_button("Roll Dice");
-    int dice_set_list = form.create_list("Dice Type");
-    int dice_mod_list = form.create_list("Number of Dice");
-    int custom_mod_list = form.create_list("Custom Modifier");
+    int roll = form.create_button("&Roll Dice", true);
+    int dice_set_list = form.create_list("Dice &Type");
+    int dice_mod_list = form.create_list("&Number of Dice");
+    int custom_mod_list = form.create_list("&Custom Modifier");
     string[] dice_values = {"100-sided (D100)", "30-sided (D30)", "20-sided (D20)", "16-sided (D16)", "12-sided (D12)", "8-sided (D8)", "6-sided (D6)", "4-sided (D4)", "3-sided (D3)", "2-sided (D2)"};
     for (uint i = 0; i < dice_values.length(); i++)
     {
@@ -37,7 +84,7 @@ void dicegame()
     {
         form.add_list_item(dice_mod_list, dice_sets[i]);
     }
-    form.set_list_position(dice_mod_list, 19); // Default to 1 die
+    form.set_list_position(dice_mod_list, 19);
     string[] custom_modifiers = {"+10", "+5", "+3", "+1", "0", "-1", "-3", "-5", "-10"};
     for (uint i = 0; i < custom_modifiers.length(); i++)
     {
@@ -46,18 +93,18 @@ void dicegame()
     form.set_list_position(custom_mod_list, 4);
     while (true)
     {
-        form.monitor();
         wait(5);
+        form.monitor();
         if (form.is_pressed(roll) && !rolling)
         {
             rolling = true;
             Rolltimer.restart();
-            pool.play_stationary("sounds/diceroll.ogg", false);
+            pool.play_stationary("sounds/common/hand/shake"+random(1,4)+".ogg", false);
+speak("rolling dice");
         }
-        if (rolling && Rolltimer.elapsed >= 1000)
+        if (rolling && Rolltimer.elapsed >=random(1500, 3000))
         {
             rolling = false;
-            pool.play_stationary("sounds/dicebeep" + random(1, 2) + ".ogg", false);
             int selected_dice_value = 6;
             switch (form.get_list_position(dice_set_list))
             {
@@ -88,7 +135,7 @@ void dicegame()
             }
             int total = 0;
             string results = "The dice show: ";
-            for (int i = 0; i < selected_dice_count; i++)
+            for (uint i = 0; i < selected_dice_count; i++)
             {
                 int roll = random(1, selected_dice_value);
                 total += roll;
@@ -110,6 +157,8 @@ void dicegame()
             total += selected_custom_modifier;
             results += ", with a modifier of " + modifier_text;
             results += ", for a total score of " + to_string(total);
+pool.destroy_all();
+            pool.play_stationary("sounds/common/hand/land"+random(1,6)+".ogg",false);
             speak(results);
         }
         if (key_pressed(KEY_ESCAPE))
