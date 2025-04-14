@@ -99,10 +99,10 @@ void dicegame()
         {
             rolling = true;
             Rolltimer.restart();
-            pool.play_stationary("sounds/common/hand/shake"+random(1,4)+".ogg", false);
+            pool.play_stationary("sounds/common/classic/shake"+random(1,1)+".ogg", false);
 speak("rolling dice");
         }
-        if (rolling && Rolltimer.elapsed >=random(1500, 3000))
+        if (rolling && Rolltimer.elapsed >=random(1000, 2000))
         {
             rolling = false;
             int selected_dice_value = 6;
@@ -158,7 +158,7 @@ speak("rolling dice");
             results += ", with a modifier of " + modifier_text;
             results += ", for a total score of " + to_string(total);
 pool.destroy_all();
-            pool.play_stationary("sounds/common/hand/land"+random(1,6)+".ogg",false);
+            pool.play_stationary("sounds/common/classic/land"+random(1,2)+".ogg",false);
             speak(results);
         }
         if (key_pressed(KEY_ESCAPE))
